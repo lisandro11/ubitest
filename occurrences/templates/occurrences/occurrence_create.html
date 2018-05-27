@@ -1,0 +1,14 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
+<div class="create-occurrence">
+  <h2>Create an Occurrence</h2>
+  <form class="site-form" action="{% url 'occurrences:create' %}" method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="create">
+  </form>
+</div>
+
+{% endblock %}
