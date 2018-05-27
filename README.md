@@ -18,7 +18,7 @@ These instructions will get you a copy of the project up and running on your loc
 Python  3.6.5
 Django 2.0.5
 Django Rest Framework 3.8.2
-Django Rest Framework 0.13
+Django Rest Framework GIS 0.13
 ```
 
 ### Installing
@@ -55,6 +55,40 @@ $python manage.py makemigrations
 $python manage.py migrate
 $python manage.py createsuperuser
 $python manage.py runserver
+```
+
+### Some API Endpoints
+```
+Create Occurrence(description, location, category)
+POST: /api/occurrences/create/
+
+List all occurrences
+GET: /api/occurrences/
+
+List Occurrence with id = <id>
+GET: /api/occurrences/?id=<id>
+GET: /api/occurrences/<id>/
+
+Update Occurrence with id = <id>
+PUT: /api/occurrences/<id>/
+
+Update Occurrence with id = <id>
+PATCH: /api/occurrences/<id>/
+
+Delete Occurrence with id = <id>
+DELETE: /api/occurrences/<id>/
+
+Validate Occurrence with id = <id> (Change state)
+PUT: /api/occurrences/validate/<id>/
+
+List of occurrences created by author with id = <author_id>
+GET: /api/occurrences/author/<author_id>/
+
+List of occurrences created with category = <category>
+GET: /api/occurrences/category/<category>/
+
+List of occurrences in indicated range
+GET: /api/occurrences/inrange/?dist=<int>&point=<double>,<double>
 ```
 
 ## Authors

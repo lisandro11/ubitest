@@ -61,7 +61,7 @@ class OccurrenceDetails(generics.RetrieveUpdateDestroyAPIView):
 
 occurrence_details = OccurrenceDetails.as_view()
 
-class OccurrencesCreateAPIView(generics.CreateAPIView):
+class OccurrencesCreateView(generics.CreateAPIView):
     '''
     This view should gives the possibility for authenticated users to create occurrences
     '''
@@ -77,9 +77,9 @@ class OccurrencesCreateAPIView(generics.CreateAPIView):
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
-occurrence_create = OccurrencesCreateAPIView.as_view()
+occurrence_create = OccurrencesCreateView.as_view()
 
-class OccurrenceRetrieveUpdateView(generics.RetrieveUpdateAPIView):
+class OccurrenceValidateView(generics.RetrieveUpdateAPIView):
     """
     Return an occurence with the id as determined by the id portion of the URL.
     Admin can update this Occurrence and change the state.
@@ -95,7 +95,7 @@ class OccurrenceRetrieveUpdateView(generics.RetrieveUpdateAPIView):
     def get_serializer_context(self, *args, **kwargs):
         return {"request": self.request}
 
-occurrence_update = OccurrenceRetrieveUpdateView.as_view()
+occurrence_update = OccurrenceValidateView.as_view()
 
 class OccurrencesByAuthorView(generics.ListAPIView):
     """
