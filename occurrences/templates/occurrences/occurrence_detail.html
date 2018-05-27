@@ -1,0 +1,17 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
+<div class="occurrence-detail">
+    <div class="occurrence">
+      <h2>{{ occurrence.description }}</h2>
+      <p><strong>Category:</strong>{{ occurrence.get_category_display }}</p>
+      <p><strong>State:</strong> {{ occurrence.state }}</p>
+      <br />
+      <p><strong>By:</strong> {{ occurrence.author }}</p>
+      <p><strong>Create on:</strong> {{ occurrence.creation_date }}</p>
+      <p><strong>Updated on:</strong> {{ occurrence.update_date }}</p>
+    </div>
+</div>
+
+{% endblock %}

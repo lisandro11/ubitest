@@ -1,0 +1,38 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
+ <div id="mapid"></div>
+
+<div class="occurrences">
+  {% for occurrence in occurrences %}
+    <div class="occurrence">
+      <h2><a href="{% url 'occurrences:detail' id=occurrence.id %}">{{ occurrence.description }}</a></h2>
+      <p>{{ occurrence.get_category_display }}</p>
+      <p>{{ occurrence.location }}</p>
+      <p><strong>By:</strong> {{ occurrence.author }}</p>
+      <p><strong>Created on:</strong> {{ occurrence.creation_date }}</p>
+    </div>
+  {% endfor %}
+</div>
+
+
+<script>
+
+var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+
+
+{% for occurrence in occurrences %}
+lat = {{ occurrence.long }}
+long = {{ occurrence.lat }}
+var marker = L.marker([lat,long]).addTo(mymap);
+marker.bindPopup("" + '{{occurrence.description}}' + "</b><br>" + "" + '{{occurrence.state}}' + "</b><br>" +"" + '{{occurrence.category}}' + "</b><br>" +'{{occurrence.author}}' + " - " + '{{occurrence.creation_date}}' + "</b><br>" + ".").openPopup();
+{% endfor %}
+
+
+
+</script>
+
+
+
+{% endblock %}
