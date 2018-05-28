@@ -1,0 +1,82 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+<!--
+<div id="mapid"></div>
+
+<script>
+
+var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+
+
+{% for occurrence in occurrences %}
+lat = {{ occurrence.location.x }}
+long = {{ occurrence.location.y }}
+var marker = L.marker([lat,long]).addTo(mymap);
+marker.bindPopup("" + '{{occurrence.description}}' + "</b><br>" + "" + '{{occurrence.state}}' + "</b><br>" +"" + '{{occurrence.category}}' + "</b><br>" +'{{occurrence.author}}' + " - " + '{{occurrence.creation_date}}' + "</b><br>" + ".").openPopup();
+{% endfor %}
+
+
+</script>
+ -->
+
+ <div id="googleMap" style="width:100%;height:400px;"></div>
+
+ <script>
+
+ // create map
+ function myMap() {
+   var mapProp= {
+       center:new google.maps.LatLng(51.508742,-0.120850),
+       zoom:2,
+   };
+
+   var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+
+
+
+
+   {% for occurrence in occurrences %}
+
+
+     marker = new google.maps.Marker({
+       map: map,
+       animation: google.maps.Animation.DROP,
+       position: {lat: {{occurrence.location.x}}, lng: {{occurrence.location.y}}},
+       // label: '{{occurrence.state}}',
+       title: '{{occurrence.author.username}}'
+     });
+
+     var contentString = '<div id="content">'+
+         '<div id="">'+
+         '</div>'+
+         '<h1 id="firstHeading" class="firstHeading">{{occurrence.description}}</h1>'+
+         '<div id="bodyContent">'+
+         '<p><b>Category:</b> {{occurrence.get_category_display}} </p>'+
+         '<p><b>State:</b> {{occurrence.state}} </p>'+
+         '<p><b>Created on:</b> {{occurrence.creation_date}} </p>'+
+         '<p><b>Author: {{occurrence.author.username}}</b>, (last update: {{occurrence.update_date}}).</p>'+
+         '</div>'+
+         '</div>';
+
+     var infowindow = new google.maps.InfoWindow({
+       content: contentString
+     });
+
+     marker.addListener('click', function() {
+         infowindow.open(map, marker);
+       });
+
+
+   {% endfor %}
+
+
+
+ }
+ </script>
+
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfJdkQvwhB31GMWGE3eIi8l64Q7tRMTg4&callback=myMap"></script>
+
+
+{% endblock %}

@@ -2,37 +2,40 @@
 
 {% block content %}
 
- <div id="mapid"></div>
+ <div id="tableList">
+   <table id="myTable" class="display" style="width:100%">
+           <thead>
+               <tr>
+                   <th>Descryption</th>
+                   <th>Category</th>
+                   <th>State</th>
+                   <th>location</th>
+                   <th>Creation date</th>
+                   <th>Author</th>
+               </tr>
+           </thead>
+           <tbody>
+             {% for occurrence in occurrences %}
+               <tr>
+                   <td>{{ occurrence.description }}</td>
+                   <td>{{ occurrence.get_category_display }}</td>
+                   <td>{{ occurrence.state }}</td>
+                   <td>({{ occurrence.location.x }},{{ occurrence.location.y }})</td>
+                   <td>{{ occurrence.creation_date }}</td>
+                   <td>{{ occurrence.author }}</td>
+               </tr>
+              {% endfor %}
 
-<div class="occurrences">
-  {% for occurrence in occurrences %}
-    <div class="occurrence">
-      <h2><a href="{% url 'occurrences:detail' id=occurrence.id %}">{{ occurrence.description }}</a></h2>
-      <p>{{ occurrence.get_category_display }}</p>
-      <p>{{ occurrence.location }}</p>
-      <p><strong>By:</strong> {{ occurrence.author }}</p>
-      <p><strong>Created on:</strong> {{ occurrence.creation_date }}</p>
-    </div>
-  {% endfor %}
-</div>
-
+           </tbody>
+       </table>
+ </div>
 
 <script>
 
-var mymap = L.map('mapid').setView([51.505, -0.09], 13);
-
-
-{% for occurrence in occurrences %}
-lat = {{ occurrence.long }}
-long = {{ occurrence.lat }}
-var marker = L.marker([lat,long]).addTo(mymap);
-marker.bindPopup("" + '{{occurrence.description}}' + "</b><br>" + "" + '{{occurrence.state}}' + "</b><br>" +"" + '{{occurrence.category}}' + "</b><br>" +'{{occurrence.author}}' + " - " + '{{occurrence.creation_date}}' + "</b><br>" + ".").openPopup();
-{% endfor %}
-
-
+  $(document).ready( function () {
+      $('#myTable').DataTable();
+  } );
 
 </script>
-
-
 
 {% endblock %}

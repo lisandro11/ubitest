@@ -1,6 +1,6 @@
 body {
-  background-color: #0f121f;
-  color: #fff;
+  background-color: #ddd;
+  color: #0f121f;
 }
 
 #mapid {
@@ -19,7 +19,7 @@ h1, h2, h3, h4, h5{
 }
 
 a, a:hover, a:visited{
-  color: #fff;
+  color: #0f121f;
   text-decoration: none;
 }
 
@@ -30,7 +30,7 @@ a, a:hover, a:visited{
 
 div.wrapper > h1{
     text-align: center;
-    margin: 100px auto;
+    /* margin: 100px auto; */
     font-size: 2.4em
 }
 
@@ -52,7 +52,7 @@ nav li{
 
 nav button{
     background: none;
-    color: #fff;
+    color: #0f121f;
     cursor: pointer;
     border: 0;
     font-size: 16px;
