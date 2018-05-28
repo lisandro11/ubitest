@@ -2,10 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 
-'''
-View for user registration
-'''
 def signup_view(request):
+    '''
+    View for user registration
+    '''
     if request.method == 'POST':
         #receive data from Form
         form = UserCreationForm(request.POST)
@@ -20,10 +20,10 @@ def signup_view(request):
         form = UserCreationForm()
     return render(request, 'accounts/signup.html', {'form':form})
 
-'''
-View for user Login
-'''
 def login_view(request):
+    '''
+    View for user Login
+    '''
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
@@ -38,10 +38,10 @@ def login_view(request):
         form = AuthenticationForm()
     return render(request, 'accounts/login.html', {'form':form})
 
-'''
-View for user Logout 
-'''
 def logout_view(request):
+    '''
+    View for user Logout
+    '''
     if request.method == 'POST':
         logout(request)
         return redirect('occurrences:list')

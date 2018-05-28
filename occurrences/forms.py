@@ -10,4 +10,4 @@ class CreateOccurrence(forms.ModelForm):
     long = forms.FloatField(required=True)
     class Meta:
         model = models.Occurrence
-        fields = ('description', 'category', 'lat', 'long')
+        fields = ('lat', 'long','description', 'category',)
